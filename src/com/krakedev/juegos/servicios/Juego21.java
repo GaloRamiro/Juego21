@@ -266,4 +266,72 @@ public class Juego21 {
 		 */
 		return ganadores;
 	}
+
+	/*
+	 * Ejecuta una partida del juego 21.
+	 *
+	 * La partida tendrá como máximo 3 rondas.
+	 *
+	 * En cada ronda: 1. Se reparte una carta a cada jugador. 2. Se calculan
+	 * automáticamente los puntajes. 3. Se buscan jugadores con exactamente 21
+	 * puntos. 4. Si existe al menos un ganador, el juego se detiene.
+	 *
+	 * Finalmente retorna la lista de ganadores.
+	 */
+	public ArrayList<Jugador> jugar() {
+
+		/*
+		 * Creamos una lista vacía para almacenar los jugadores que logren llegar a 21.
+		 */
+		ArrayList<Jugador> ganadores = new ArrayList<Jugador>();
+
+		/*
+		 * Ejecutamos como máximo 3 rondas.
+		 *
+		 * i empieza en 0.
+		 *
+		 * Las iteraciones serán: i = 0 -> primera ronda i = 1 -> segunda ronda i = 2 ->
+		 * tercera ronda
+		 */
+		for (int i = 0; i < 3; i++) {
+
+			/*
+			 * Repartimos una carta a cada jugador.
+			 *
+			 * Recuerda que repartirRonda() también llama a calcularTotal().
+			 */
+			repartirRonda();
+
+			/*
+			 * Después de repartir las cartas, buscamos jugadores que tengan exactamente 21
+			 * puntos.
+			 */
+			ganadores = validarGanador();
+
+			/*
+			 * size() nos indica cuántos elementos existen dentro del ArrayList.
+			 *
+			 * Si es mayor que 0 significa que encontramos al menos un ganador.
+			 */
+			if (ganadores.size() > 0) {
+
+				/*
+				 * break permite terminar inmediatamente el ciclo for.
+				 *
+				 * Ya no necesitamos continuar repartiendo porque encontramos un ganador.
+				 */
+				break;
+			}
+		}
+
+		/*
+		 * Retornamos la lista de ganadores.
+		 *
+		 * Puede retornar:
+		 *
+		 * [] -> ningún ganador [Jugador] -> un ganador [Jugador, ...] -> varios
+		 * ganadores
+		 */
+		return ganadores;
+	}
 }
