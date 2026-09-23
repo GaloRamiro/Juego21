@@ -334,4 +334,35 @@ public class Juego21 {
 		 */
 		return ganadores;
 	}
+	/*
+	 * Prepara el juego para comenzar una nueva partida.
+	 *
+	 * Reinicia las cartas y los puntos de todos
+	 * los jugadores y crea nuevamente el naipe.
+	 */
+	public void reiniciarJuego() {
+
+	    /*
+	     * Recorremos todos los jugadores registrados.
+	     */
+	    for (Jugador jugador : jugadores) {
+
+	        /*
+	         * Eliminamos sus cartas y colocamos
+	         * su puntaje nuevamente en cero.
+	         */
+	        jugador.reiniciar();
+	    }
+
+	    /*
+	     * inicializar() crea un Dealer nuevo.
+	     *
+	     * Al crear un Dealer nuevo obtenemos
+	     * nuevamente las 52 cartas.
+	     *
+	     * También se vuelven a cargar los valores
+	     * de las cartas.
+	     */
+	    inicializar();
+	}
 }

@@ -1,20 +1,15 @@
 package com.krakedev.juegos.test;
 
+import java.util.ArrayList;
+
 import com.krakedev.juegos.entidades.Jugador;
 import com.krakedev.juegos.servicios.Juego21;
 
 /*
- * Clase de prueba para verificar el funcionamiento
- * inicial del juego de 21.
+ * Prueba final del juego de 21.
  *
- * En esta prueba:
- * 1. Creamos el juego.
- * 2. Creamos tres jugadores.
- * 3. Agregamos los jugadores al juego.
- * 4. Inicializamos el Dealer.
- * 5. Repartimos una carta a cada jugador.
- * 6. Imprimimos las cartas de los jugadores.
- * 7. Verificamos las cartas restantes del naipe.
+ * Se ejecutan varias partidas para comprobar
+ * el comportamiento aleatorio del juego.
  */
 public class TestJuego21 {
 
@@ -22,9 +17,6 @@ public class TestJuego21 {
 
         /*
          * Creamos el objeto principal del juego.
-         *
-         * En este momento todavía no hemos
-         * inicializado el Dealer.
          */
         Juego21 juego = new Juego21();
 
@@ -32,11 +24,6 @@ public class TestJuego21 {
          * Creamos el primer jugador.
          */
         Jugador jugador1 = new Jugador();
-
-        /*
-         * Asignamos su nickname utilizando
-         * el setter que creamos en Jugador.
-         */
         jugador1.setNickname("Galo");
 
         /*
@@ -52,82 +39,109 @@ public class TestJuego21 {
         jugador3.setNickname("Ana");
 
         /*
-         * Agregamos los tres jugadores
-         * al ArrayList de jugadores de Juego21.
+         * Agregamos los tres jugadores al juego.
+         *
+         * Esto solamente se hace una vez.
          */
         juego.agregarJugador(jugador1);
         juego.agregarJugador(jugador2);
         juego.agregarJugador(jugador3);
 
         /*
-         * Inicializamos el juego.
+         * Inicializamos el juego por primera vez.
          *
-         * Este método:
-         * 1. Crea el Dealer.
-         * 2. El Dealer genera las 52 cartas.
-         * 3. cargarValores() asigna los valores
-         *    correspondientes a cada carta.
+         * Esto crea el Dealer, genera las 52 cartas
+         * y asigna los valores de juego.
          */
         juego.inicializar();
 
         /*
-         * Mostramos la cantidad de cartas
-         * antes de repartir.
+         * Ejecutaremos como máximo 10 partidas.
          *
-         * El resultado esperado es 52.
+         * Esto nos ayuda a comprobar el comportamiento
+         * aleatorio del juego.
          */
-        System.out.println("Cartas antes de repartir: "
-                + juego.getDealer().getNaipe().size());
+        for (int i = 0; i < 10; i++) {
 
-        /*
-         * Repartimos una carta a cada jugador.
-         *
-         * Como tenemos tres jugadores,
-         * el Dealer entregará tres cartas.
-         */
-        juego.repartirRonda();
+            System.out.println();
+            System.out.println("============================");
+            System.out.println("PARTIDA " + (i + 1));
+            System.out.println("============================");
 
-        /*
-         * Mostramos las cartas que recibió
-         * cada jugador.
-         */
-        System.out.println();
-        System.out.println("===== CARTAS DE LOS JUGADORES =====");
+            /*
+             * Ejecutamos la partida.
+             *
+             * jugar() realiza como máximo 3 rondas
+             * y retorna los jugadores que llegaron
+             * exactamente a 21 puntos.
+             */
+            ArrayList<Jugador> ganadores = juego.jugar();
 
-        jugador1.imprimir();
+            /*
+             * Mostramos la información final
+             * de todos los jugadores.
+             */
+            System.out.println();
+            System.out.println("RESULTADOS:");
 
-        System.out.println();
+            for (Jugador jugador : juego.getJugadores()) {
 
-        jugador2.imprimir();
+                jugador.imprimir();
 
-        System.out.println();
+                System.out.println("--------------------");
+            }
 
-        jugador3.imprimir();
+            /*
+             * Comprobamos si encontramos
+             * al menos un ganador.
+             */
+            if (ganadores.size() > 0) {
 
-        /*
-         * Como empezamos con 52 cartas y
-         * entregamos una a cada uno de los
-         * tres jugadores:
-         *
-         * 52 - 3 = 49
-         *
-         * Por lo tanto, deben quedar
-         * 49 cartas en el naipe.
-         */
-        System.out.println();
-        System.out.println("Cartas restantes en el naipe: "
-                + juego.getDealer().getNaipe().size());
+                System.out.println();
+                System.out.println("GANADOR/ES:");
 
-        /*
-         * Finalmente imprimimos el naipe restante.
-         *
-         * Aquí podremos comprobar que las cartas
-         * entregadas a los jugadores ya no
-         * aparecen dentro del naipe.
-         */
-        System.out.println();
-        System.out.println("===== NAIPE RESTANTE =====");
+                /*
+                 * Puede existir más de un ganador,
+                 * por eso recorremos el ArrayList.
+                 */
+                for (Jugador ganador : ganadores) {
 
-        juego.getDealer().imprimirNaipe();
+                    System.out.println(
+                            ganador.getNickname()
+                            + " con "
+                            + ganador.getPuntajeCartas()
+                            + " puntos"
+                    );
+                }
+
+                /*
+                 * Encontramos ganador, por lo tanto
+                 * ya no necesitamos continuar
+                 * ejecutando más partidas.
+                 */
+                break;
+            }
+
+            /*
+             * Si no hubo ganador y todavía quedan
+             * partidas por probar, reiniciamos.
+             *
+             * Los jugadores vuelven a:
+             *
+             * cartas = []
+             * puntajeCartas = 0
+             *
+             * y el Dealer vuelve a tener 52 cartas.
+             */
+            if (i < 9) {
+
+                System.out.println();
+                System.out.println(
+                        "No hubo ganador. Reiniciando juego..."
+                );
+
+                juego.reiniciarJuego();
+            }
+        }
     }
 }

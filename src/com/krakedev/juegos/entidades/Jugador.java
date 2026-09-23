@@ -90,29 +90,46 @@ public class Jugador {
 	}
 
 	/*
-	 * Imprime el nickname, las cartas
-	 * y el puntaje actual del jugador.
+	 * Imprime el nickname, las cartas y el puntaje actual del jugador.
 	 */
 	public void imprimir() {
 
-	    /*
-	     * Mostramos el nickname.
-	     */
-	    System.out.println("Jugador: " + nickname);
+		/*
+		 * Mostramos el nickname.
+		 */
+		System.out.println("Jugador: " + nickname);
 
-	    /*
-	     * Recorremos e imprimimos las cartas
-	     * que tiene el jugador.
-	     */
-	    for (Carta carta : cartas) {
+		/*
+		 * Recorremos e imprimimos las cartas que tiene el jugador.
+		 */
+		for (Carta carta : cartas) {
 
-	        carta.imprimir();
-	    }
+			carta.imprimir();
+		}
 
-	    /*
-	     * Finalmente mostramos el puntaje
-	     * total calculado.
-	     */
-	    System.out.println("Puntaje total: " + puntajeCartas);
+		/*
+		 * Finalmente mostramos el puntaje total calculado.
+		 */
+		System.out.println("Puntaje total: " + puntajeCartas);
+	}
+
+	/*
+	 * Reinicia los datos del jugador para comenzar una nueva partida.
+	 *
+	 * Se eliminan todas sus cartas y su puntaje vuelve a cero.
+	 */
+	public void reiniciar() {
+
+		/*
+		 * clear() elimina todos los elementos almacenados en el ArrayList.
+		 *
+		 * El jugador conserva su nickname, pero se queda sin cartas.
+		 */
+		cartas.clear();
+
+		/*
+		 * Reiniciamos el puntaje para que la nueva partida comience desde cero.
+		 */
+		puntajeCartas = 0;
 	}
 }
