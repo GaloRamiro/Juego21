@@ -75,4 +75,31 @@ public class Jugador {
          */
         cartas.add(carta);
     }
+    
+    /*
+     * Imprime la información del jugador.
+     *
+     * Primero muestra su nickname y después
+     * todas las cartas que ha recibido.
+     */
+    public void imprimir() {
+
+        /*
+         * Mostramos el nombre del jugador.
+         */
+        System.out.println("Jugador: " + nickname);
+
+        /*
+         * Recorremos todas las cartas
+         * que tiene actualmente el jugador.
+         */
+        for (Carta carta : cartas) {
+
+            /*
+             * Utilizamos el método imprimir()
+             * que ya existe en Carta.
+             */
+            carta.imprimir();
+        }
+    }
 }
