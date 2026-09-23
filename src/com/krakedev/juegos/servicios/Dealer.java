@@ -187,4 +187,61 @@ public class Dealer {
 		 */
 		return numero;
 	}
+	
+	/*
+	 * Entrega una carta aleatoria del naipe.
+	 *
+	 * La carta seleccionada se elimina del ArrayList,
+	 * evitando que pueda volver a salir posteriormente.
+	 *
+	 * El método no recibe parámetros y retorna
+	 * un objeto de tipo Carta.
+	 */
+	public Carta entregarCarta() {
+
+	    /*
+	     * Obtenemos la cantidad actual de cartas.
+	     *
+	     * Como las posiciones de un ArrayList empiezan
+	     * desde 0, debemos restar 1 al tamaño.
+	     *
+	     * Ejemplo:
+	     *
+	     * Si existen 52 cartas:
+	     * size() devuelve 52
+	     *
+	     * pero las posiciones disponibles son:
+	     * 0 hasta 51.
+	     */
+	    int maximo = naipe.size() - 1;
+
+	    /*
+	     * Generamos una posición aleatoria entre
+	     * 0 y la última posición disponible.
+	     */
+	    int posicion = generarAleatorio(maximo);
+
+	    /*
+	     * Recuperamos la carta que se encuentra
+	     * en la posición aleatoria.
+	     *
+	     * get(posicion) obtiene un elemento
+	     * del ArrayList sin eliminarlo.
+	     */
+	    Carta cartaElegida = naipe.get(posicion);
+
+	    /*
+	     * Eliminamos del naipe la carta que acabamos
+	     * de seleccionar.
+	     *
+	     * Esto es importante porque una carta que ya
+	     * salió no debe volver a aparecer.
+	     */
+	    naipe.remove(posicion);
+
+	    /*
+	     * Finalmente devolvemos la carta seleccionada.
+	     */
+	    return cartaElegida;
+	}
 }
