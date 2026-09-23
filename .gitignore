@@ -1,0 +1,23 @@
+# Archivos compilados de Java
+bin/
+target/
+out/
+*.class
+
+# Configuración de Eclipse
+.settings/
+.project
+.classpath
+
+# Archivos temporales
+*.log
+*.tmp
+*.swp
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# IDE adicionales
+.idea/
+*.iml
