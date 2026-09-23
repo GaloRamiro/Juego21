@@ -161,24 +161,22 @@ public class Juego21 {
 	}
 
 	/*
-	 * Reparte una carta a cada jugador
-	 * y después actualiza sus puntajes.
+	 * Reparte una carta a cada jugador y después actualiza sus puntajes.
 	 */
 	public void repartirRonda() {
 
-	    /*
-	     * Entregamos una carta a cada jugador.
-	     */
-	    for (Jugador jugador : jugadores) {
+		/*
+		 * Entregamos una carta a cada jugador.
+		 */
+		for (Jugador jugador : jugadores) {
 
-	        repartirCarta(jugador);
-	    }
+			repartirCarta(jugador);
+		}
 
-	    /*
-	     * Después de que todos recibieron su carta,
-	     * volvemos a calcular sus puntajes.
-	     */
-	    calcularTotal();
+		/*
+		 * Después de que todos recibieron su carta, volvemos a calcular sus puntajes.
+		 */
+		calcularTotal();
 	}
 
 	/*
@@ -225,5 +223,47 @@ public class Juego21 {
 			 */
 			jugador.setPuntajeCartas(total);
 		}
+	}
+
+	/*
+	 * Busca los jugadores que tienen exactamente 21 puntos.
+	 *
+	 * El método retorna un ArrayList<Jugador> porque puede existir:
+	 *
+	 * - ningún ganador - un ganador - varios ganadores
+	 */
+	public ArrayList<Jugador> validarGanador() {
+
+		/*
+		 * Creamos una lista vacía donde vamos a guardar únicamente a los jugadores que
+		 * tengan 21 puntos.
+		 */
+		ArrayList<Jugador> ganadores = new ArrayList<Jugador>();
+
+		/*
+		 * Recorremos todos los jugadores que participan en el juego.
+		 */
+		for (Jugador jugador : jugadores) {
+
+			/*
+			 * Consultamos el puntaje del jugador.
+			 *
+			 * Si tiene exactamente 21 puntos, significa que es ganador.
+			 */
+			if (jugador.getPuntajeCartas() == 21) {
+
+				/*
+				 * Agregamos el objeto Jugador a la lista de ganadores.
+				 */
+				ganadores.add(jugador);
+			}
+		}
+
+		/*
+		 * Después de revisar todos los jugadores, retornamos la lista.
+		 *
+		 * Si nadie tiene 21, la lista estará vacía.
+		 */
+		return ganadores;
 	}
 }
