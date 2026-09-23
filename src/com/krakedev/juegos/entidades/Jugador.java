@@ -11,95 +11,108 @@ import java.util.ArrayList;
  */
 public class Jugador {
 
-    /*
-     * Nombre o apodo que identifica al jugador.
-     *
-     * Ejemplos:
-     * "Galo"
-     * "Jugador1"
-     * "Pedro"
-     */
-    private String nickname;
+	/*
+	 * Nombre o apodo que identifica al jugador.
+	 *
+	 * Ejemplos: "Galo" "Jugador1" "Pedro"
+	 */
+	private String nickname;
+	/*
+	 * Guarda la suma total de los puntos de las cartas que tiene el jugador.
+	 *
+	 * Ejemplo: A = 11 J = 10
+	 *
+	 * puntajeCartas = 21
+	 */
+	private int puntajeCartas;
 
-    /*
-     * Lista donde se almacenarán las cartas
-     * que recibe el jugador durante el juego.
-     *
-     * El ejercicio indica que debemos inicializar
-     * directamente el ArrayList en la declaración.
-     */
-    private ArrayList<Carta> cartas = new ArrayList<Carta>();
+	/*
+	 * Retorna el puntaje total que tiene actualmente el jugador.
+	 */
+	public int getPuntajeCartas() {
+		return puntajeCartas;
+	}
 
-    /*
-     * Retorna el nickname del jugador.
-     */
-    public String getNickname() {
-        return nickname;
-    }
+	/*
+	 * Permite asignar el puntaje total de las cartas del jugador.
+	 */
+	public void setPuntajeCartas(int puntajeCartas) {
+		this.puntajeCartas = puntajeCartas;
+	}
 
-    /*
-     * Permite asignar el nickname del jugador.
-     */
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
+	/*
+	 * Lista donde se almacenarán las cartas que recibe el jugador durante el juego.
+	 *
+	 * El ejercicio indica que debemos inicializar directamente el ArrayList en la
+	 * declaración.
+	 */
+	private ArrayList<Carta> cartas = new ArrayList<Carta>();
 
-    /*
-     * Retorna la lista de cartas que tiene
-     * actualmente el jugador.
-     */
-    public ArrayList<Carta> getCartas() {
-        return cartas;
-    }
+	/*
+	 * Retorna el nickname del jugador.
+	 */
+	public String getNickname() {
+		return nickname;
+	}
 
-    /*
-     * Permite reemplazar la lista de cartas
-     * del jugador.
-     */
-    public void setCartas(ArrayList<Carta> cartas) {
-        this.cartas = cartas;
-    }
+	/*
+	 * Permite asignar el nickname del jugador.
+	 */
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
 
-    /*
-     * Recibe una carta y la agrega a la lista
-     * de cartas del jugador.
-     *
-     * Este método será utilizado posteriormente
-     * por la clase Juego21.
-     */
-    public void recibirCarta(Carta carta) {
+	/*
+	 * Retorna la lista de cartas que tiene actualmente el jugador.
+	 */
+	public ArrayList<Carta> getCartas() {
+		return cartas;
+	}
 
-        /*
-         * add() agrega el objeto Carta al final
-         * del ArrayList.
-         */
-        cartas.add(carta);
-    }
-    
-    /*
-     * Imprime la información del jugador.
-     *
-     * Primero muestra su nickname y después
-     * todas las cartas que ha recibido.
-     */
-    public void imprimir() {
+	/*
+	 * Permite reemplazar la lista de cartas del jugador.
+	 */
+	public void setCartas(ArrayList<Carta> cartas) {
+		this.cartas = cartas;
+	}
 
-        /*
-         * Mostramos el nombre del jugador.
-         */
-        System.out.println("Jugador: " + nickname);
+	/*
+	 * Recibe una carta y la agrega a la lista de cartas del jugador.
+	 *
+	 * Este método será utilizado posteriormente por la clase Juego21.
+	 */
+	public void recibirCarta(Carta carta) {
 
-        /*
-         * Recorremos todas las cartas
-         * que tiene actualmente el jugador.
-         */
-        for (Carta carta : cartas) {
+		/*
+		 * add() agrega el objeto Carta al final del ArrayList.
+		 */
+		cartas.add(carta);
+	}
 
-            /*
-             * Utilizamos el método imprimir()
-             * que ya existe en Carta.
-             */
-            carta.imprimir();
-        }
-    }
+	/*
+	 * Imprime el nickname, las cartas
+	 * y el puntaje actual del jugador.
+	 */
+	public void imprimir() {
+
+	    /*
+	     * Mostramos el nickname.
+	     */
+	    System.out.println("Jugador: " + nickname);
+
+	    /*
+	     * Recorremos e imprimimos las cartas
+	     * que tiene el jugador.
+	     */
+	    for (Carta carta : cartas) {
+
+	        carta.imprimir();
+	    }
+
+	    /*
+	     * Finalmente mostramos el puntaje
+	     * total calculado.
+	     */
+	    System.out.println("Puntaje total: " + puntajeCartas);
+	}
 }
